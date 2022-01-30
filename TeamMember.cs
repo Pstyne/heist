@@ -5,11 +5,9 @@ namespace Heist
   //*  Create a way to store a single team member. 
   public class TeamMember
   {
-    public TeamMember()
+    public TeamMember(string nameInput)
     {
-      //*  Prompt the user to enter a team member's name and save that name.
-      Console.WriteLine("Enter name for new team member");
-      _name = Console.ReadLine();
+      _name = nameInput;
 
       //*  Prompt the user to enter a team member's skill level and save that skill level with the name.
       InputSkill();
@@ -44,12 +42,12 @@ namespace Heist
         Console.WriteLine("Enter courage for new team member. Must be between 0 - 2, can be decimal (0.0 - 2.0)");
         courageInput = Console.ReadLine();
       }
-      _courage = parsedCourage;
+      _courage = Math.Round(parsedCourage, 1);
     }
 
     public void DisplayStats()
     {
-      Console.WriteLine($"\n============================\nName: {_name}\nSkill Level: {_skillLevel}\nCourage: {_courage}");
+      Console.WriteLine($"\n============================\nName: {_name}\nSkill Level: {_skillLevel}\nCourage: {_courage.ToString("N1")}");
     }
   }
 }
