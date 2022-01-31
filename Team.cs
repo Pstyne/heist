@@ -38,6 +38,11 @@ namespace Heist
     {
       return _teamList.Sum(tm => tm.GetSkillLevel());
     }
+
+    public List<TeamMember> GetTeamMembers()
+    {
+      return _teamList;
+    }
     public void ShowMembers()
     {
       //* Display a message containing the number of members of the team.
