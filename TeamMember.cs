@@ -45,6 +45,11 @@ namespace Heist
       _courage = Math.Round(parsedCourage, 1);
     }
 
+    public int GetSkillLevel()
+    {
+      return _skillLevel;
+    }
+
     public void DisplayStats()
     {
       Console.WriteLine($"\n============================\nName: {_name}\nSkill Level: {_skillLevel}\nCourage: {_courage.ToString("N1")}");

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Heist
 {
@@ -23,8 +24,7 @@ namespace Heist
         TeamMember newTeamMemeber = new TeamMember(newMemberNameInput);
         AddMember(newTeamMemeber);
       }
-
-      ShowMembers();            
+           
     }
     
     private List<TeamMember> _teamList { get; set; } = new List<TeamMember>();
@@ -33,6 +33,11 @@ namespace Heist
       _teamList.Add(memberBerry);
     }
 
+    //* Sum the skill levels of the team. Save that number.
+    public int TeamSkillLevel()
+    {
+      return _teamList.Sum(tm => tm.GetSkillLevel());
+    }
     public void ShowMembers()
     {
       //* Display a message containing the number of members of the team.
