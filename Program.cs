@@ -6,13 +6,42 @@ namespace Heist
 {
   public class Bank
   {
+    public Bank()
+    {
+      //? This diffLevel will start the loop 
+      int diffLevel = 0;
+      while (diffLevel <= 0)
+      {
+        //? Try to get the input. It will only really throw if the string cannot be converted to integer.
+        //? A negative number can be input but it will not cause an exception. 
+        //? When there is an exception just skip current iteration and reprompt user. 
+        try
+        {
+          Console.WriteLine("Enter a difficulty level for the bank, must be a positive integer");
+          diffLevel = Int32.Parse(Console.ReadLine());
+        }
+        catch (Exception)
+        {
+          continue;
+        }
+      }
+
+      Difficulty = diffLevel;
+    }
     //* Store a value for the bank's difficulty level. Set this value to 100.
-    public int Difficulty { get; set; } = 100;
+    public int Difficulty { get; set; }
   }
   public class HeistReport
   {
     public int TeamSkillLevel { get; set; }
     public int BankDifficultyLevel { get; set; }
+    public bool SuccessfulHeist { get; set; }
+  }
+
+  public class EndOfHeistsReport
+  {
+    public int SuccessfulHeistCount { get; set; }
+    public int FailedHeistCount { get; set; }
   }
   class Program
   {
@@ -67,13 +96,24 @@ namespace Heist
       heistReports.ForEach(hr => {
         if (hr.TeamSkillLevel >= hr.BankDifficultyLevel)
         {
-          Console.WriteLine("Your Heist was Successful!");
+          hr.SuccessfulHeist = true;
         } 
         else
         {
-          Console.WriteLine("Your Heist was NOT Successful!");
+          hr.SuccessfulHeist = false;
         }
       });
+
+      EndOfHeistsReport endOfHeistsReport = new EndOfHeistsReport(){
+        SuccessfulHeistCount = heistReports.Select(hr => hr.SuccessfulHeist).Where(hrSuccess => hrSuccess == true).Count(),
+        FailedHeistCount = heistReports.Select(hr => hr.SuccessfulHeist).Where(hrSuccess => hrSuccess == false).Count()
+      };
+
+      Console.WriteLine(@$"
+      --End of Heists Report--
+        {endOfHeistsReport.SuccessfulHeistCount} heists were successful!
+        {endOfHeistsReport.FailedHeistCount} heists failed!
+      ");
     }
   }
 }

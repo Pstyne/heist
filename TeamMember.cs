@@ -20,7 +20,7 @@ namespace Heist
     //*  The skill Level will be a positive integer 
     private int _skillLevel { get; set; }
     //*  the courage factor will be a decimal between 0.0 and 2.0.
-    private double _courage { get; set; }
+    private decimal _courage { get; set; }
 
     private void InputSkill()
     {
@@ -36,8 +36,8 @@ namespace Heist
     private void InputCourage()
     {
       string courageInput = "";
-      double parsedCourage;
-      while (!Double.TryParse(courageInput, out parsedCourage) || parsedCourage < 0 || parsedCourage > 2)
+      decimal parsedCourage;
+      while (!Decimal.TryParse(courageInput, out parsedCourage) || parsedCourage < 0 || parsedCourage > 2)
       {
         Console.WriteLine("Enter courage for new team member. Must be between 0 - 2, can be decimal (0.0 - 2.0)");
         courageInput = Console.ReadLine();
